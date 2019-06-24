@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import User
-from apps.trips.models import Trip
 from django.contrib import messages
 
 def index(request):
-    return render(request, 'user/index.html')
+    return render(request, 'user_app/index.html')
 
 def register_user(request):
     # validate user information
