@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import User
-from apps.trips.models import Trip
 from django.contrib import messages
 
 def index(request):
-    return render(request, 'user/index.html')
+    return render(request, 'user_app/index.html')
 
 def register_user(request):
     # validate user information
@@ -49,22 +48,6 @@ def user_page(request, uid):
         # "reviewed_books": user_info.reviews.all(),
     }
     return render(request, "/login/user.html", context)
-
-# region dashboard related
-def dashboard(request):
-    if not 'uid' in request.session:
-        messages.error(request, "Please log in", extra_tags="log_in")
-        return redirect("/")
-    user = User.objects.get(id=request.session['uid'])
-    context={
-        "user": user,
-        "user_trips": user.created_trips.all(),
-        "trips_joined": Trip.objects.all().filter(users=user).exclude(creator=user),
-        "trips": Trip.objects.all().exclude(creator__id=request.session['uid']).exclude(users=user)
-    }
-    return render (request, 'user/dashboard.html', context)
-
-# endregion
 
 def logout(request):
     keys = []
