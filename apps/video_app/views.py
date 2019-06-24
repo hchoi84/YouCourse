@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
 
 def index(request):
-    return HttpResponse("video page")
+
+    return render(request, "video_app/index.html")
