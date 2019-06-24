@@ -1,6 +1,4 @@
 from django.db import models
-from apps.course_app.models import *
-from apps.user_app.models import *
 from apps.video_app.models import *
 
 
