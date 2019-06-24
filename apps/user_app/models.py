@@ -1,8 +1,4 @@
 from django.db import models
-from apps.quiz_app.models import *
-from apps.course_app.models import *
-from apps.video_app.models import *
-
 
 # Create your models here.
 class UserManager(models.Manager):
