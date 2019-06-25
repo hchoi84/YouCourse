@@ -34,14 +34,14 @@ def create_course_post(request):
         else:
             for key, value in errors.items():
                 messages.error(request, value, extra_tags=key)
-            return redirect('create_course_form')
-        return redirect(f'{course_id}')
+            return redirect('/course/create_course_form')
+        return redirect(f'/course/{course_id}')
     messages.error(request, 'You are not logged in', extra_tags='user_id')
     return redirect('/')
 
 def read_course(request, course_id):
     context = {
-        'course': Category.objects.get(id=course_id),
+        'course': Course.objects.get(id=course_id),
     }
     return render(request, "course_app/read.html", context)
 

@@ -3,10 +3,10 @@ from . import views
 
 urlpatterns=[
     url(r'^$', views.index),
-    url(r'^(?P<course_id>\d+)/create_video_form$', views.create_video_form),
-    url(r'^(?P<course_id>\d+)/create_video_post$', views.create_video_post),
-    url(r'^(?P<video_id>\d+)$', views.read_video),
-    url(r'^(?P<video_id>\d+)/edit_video_form$', views.edit_video_form),
-    url(r'^(?P<video_id>\d+)/edit_video_post$', views.edit_video_post),
-    url(r'^(?P<video_id>\d+)/delete_video$', views.delete_video),
+    url(r'^(?P<course_id>\d+)/video/create_video_form$', views.create_video_form),
+    url(r'^(?P<course_id>\d+)/video/create_video_post$', views.create_video_post),
+    url(r'^(?P<course_id>\d+)/video/(?P<video_id>\d+)$', views.read_video),
+    url(r'^(?P<course_id>\d+)/video/(?P<video_id>\d+)/edit_video_form$', views.edit_video_form),
+    url(r'^(?P<course_id>\d+)/video/(?P<video_id>\d+)/edit_video_post$', views.edit_video_post),
+    url(r'^(?P<course_id>\d+)/video/(?P<video_id>\d+)/delete_video$', views.delete_video),
 ]

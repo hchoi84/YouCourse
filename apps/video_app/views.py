@@ -14,7 +14,7 @@ def create_video_post(request, course_id):
         Video.objects.create_video(course_id, request.POST)
     return redirect('video')
 
-def read_video(request, video_id):
+def read_video(request, course_id, video_id):
     video = Video.objects.get(id=video_id)
     context = {
         'title': video.title,
@@ -24,17 +24,15 @@ def read_video(request, video_id):
     }
     return render(request, "video_app/add.html", context)
 
-def delete_video(request, video_id):
+def delete_video(request, course_id, video_id):
     if request.session['user_id'] == Video.objects.get(id=video_id).User.id:
         Video.objects.delete_video(video_id)
     return redirect('video')
 
-# NICE TO HAVE...
-
-def edit_video_form(request):
+def edit_video_form(request, course_id, video_id):
     
     return redirect('video')
 
-def edit_video_post(request):
+def edit_video_post(request, course_id, video_id):
 
     return redirect('video')
