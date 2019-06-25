@@ -46,15 +46,6 @@ class UserManager(models.Manager):
     def hash_id(self, uid):
         return bcrypt.hashpw(str(uid).encode(), bcrypt.gensalt())
 
-    # def user_validator(self, uid, hashed_uid):
-    #     return bcrypt.checkpw(uid.encode(), hashed_uid.encode())
-<<<<<<< HEAD
-=======
-
-    def get_user_info(self, uid):
-        return self.get(id=uid)
->>>>>>> master
-
     def get_user_info(self, uid):
         return self.get(id=uid)
 
