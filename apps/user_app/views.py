@@ -18,7 +18,7 @@ def register_user(request):
 
     # register user
     request.session['user_id'] = User.objects.register_user(request.POST)
-    return redirect("/courses")
+    return redirect("/course")
 
 def login(request):
     # validate login info
@@ -30,7 +30,7 @@ def login(request):
      
     # login
     request.session['user_id'] = User.objects.get(email=request.POST['email']).id
-    return redirect("/courses")
+    return redirect("/course")
 
 def profile(request, user_id):
     # if not 'user_id' in request.session:
@@ -46,6 +46,12 @@ def profile(request, user_id):
         "created": user.courses_authored.all(),
     }
     return render(request, "user_app/profile.html", context)
+# region redirects
+
+def update_profile(request):
+    user_id = request.session['user_id']
+    User.objects.process_profile_update(request.POST, user_id)
+    return redirect(f"/profile/{user_id}")
 
 def logout(request):
     keys = []
@@ -54,3 +60,4 @@ def logout(request):
     for key in keys:
         del request.session[key]
     return redirect("/")
+# endregion
