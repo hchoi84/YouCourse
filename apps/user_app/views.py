@@ -30,21 +30,17 @@ def login(request):
     # request.session['hashed_uid'] = str(User.objects.hash_id(request.session['uid']))
     return redirect("/courses")
 
-def user_page(request, uid):
-    if not 'uid' in request.session:
-        messages.error(request, "Please log in", extra_tags="log_in")
-        return redirect("/")
-    # check if it's correct user
-    # hashed = request.session['hashed_uid']
-    # if not User.objects.user_validator(uid, hashed):
+def profile(request, uid):
+    # if not 'uid' in request.session:
+    #     messages.error(request, "Please log in", extra_tags="log_in")
     #     return redirect("/")
-    user_info = User.objects.get(id=uid)
-    context={
-        "fname": user_info.first_name,
-        "lname": user_info.last_name,
-        "em": user_info.email,
-    }
-    return render(request, "/login/user.html", context)
+    # user_info = User.objects.get(id=uid)
+    # context={
+    #     "fname": user_info.first_name,
+    #     "lname": user_info.last_name,
+    #     "em": user_info.email,
+    # }
+    return render(request, "user_app/profile.html")
 
 def logout(request):
     keys = []
