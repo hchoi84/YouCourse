@@ -4,10 +4,20 @@ from apps.course_app.models import Course
 
 class VideoManager(models.Manager):
     
+    def validate(self, form):
+        errors = {}
+        if len(form['title']) < 3:
+            errors['title'] = 'Please enter a title.'
+        if len(form['url']) < 30:
+            errors['url'] = 'Please enter a valid URL ex \'https://www.youtube.com/watch?v=VIDEO ID.'
+        if len(form['description']) < 3:
+            errors['description'] = 'Please create a description'
+        return errors
+
     def create_video(self, course_id, form):
         url = "https://www.youtube.com/embed/" + form['url'].split('=')[-1] #splits the video id out of the full url then concats to the YouTube embed path
-        new_video = self.create(title = form['title'], url = url, description = form['description'], likes = 0, course = Course.objects.get(id = course_id))
-        return self
+        new_video = self.create(title = form['title'], url = url, description = form['description'], course = Course.objects.get(id = course_id))
+        return new_video
     
     def delete_video(self, video_id):
         self.get(id = video_id).delete()

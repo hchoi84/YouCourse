@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="{% static 'video_app/style.css' %}">
 </head>
 <body>
-    <h1>Add Video to Course</h1>
-    <form action="add_video_post" method="POST">{% csrf_token %}
+    <h1>Add Video to {{ course.title }}</h1>
+    <form action="/course/{{ course.id }}/video/create_video_post" method="POST">{% csrf_token %}
         <div class="form-group">
             <label for="title">Title</label>
             <input name="title" type="text" class="form-control" id="title" placeholder="Title">

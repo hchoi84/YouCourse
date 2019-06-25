@@ -15,9 +15,10 @@
         <p>Subject: {{ course.subject.name }}</p>
         <p>Category: {{ course.category.name }}</p>
         <p>Description: {{ course.description }}</p>
-        <p>Likes: {{ course.likes }}</p>
+        <p>Likes: {{ course.likes|length }}</p>
         {% if author %}
             <a href="/course/{{ course.id }}/edit_course_form"><button type="button" class="btn btn-primary">Edit</button></a>
+            <a href="/course/{{ course.id }}/video/create_video_form"><button type="button" class="btn btn-primary">Add Video</button></a>
         {% endif %}
     </div>
     <div class="container">
@@ -28,10 +29,7 @@
                     <h1>{{ video.title }}</h1>
                     <p>{{ video.description }}</p>
                     <p>{{ video.likes }}</p>
-                    <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="{{ video.url }}" allowfullscreen></iframe>
-                    </div>
-                    <a href="/video/{{ course.id }}/{{ video.id }}"><button type="button">Start Video</button></a>
+                    <a href="/course/{{ course.id }}/video/{{ video.id }}"><button type="button" class="btn btn-primary">Start Video</button></a>
                     {% endfor %}
               </div>
               <div class="col-md-6">

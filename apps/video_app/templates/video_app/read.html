@@ -10,13 +10,41 @@
     <link rel="stylesheet" href="{% static 'video_app/style.css' %}">
 </head>
 <body>
-    <h1>{{ title }}</h1>
-    <p>{{ description }}</p>
-    <p>{{ likes }}</p>
-    <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="{{ url }}" allowfullscreen></iframe>
+    <div class="course-header">
+        <h1>{{ course.title }}</h1>
+        <p>Subject: {{ course.subject.name }}</p>
+        <p>Category: {{ course.category.name }}</p>
+        <p>Description: {{ course.description }}</p>
+        <p>Likes: {{ course.likes|length }}</p>
+        {% if author %}
+            <a href="/course/{{ course.id }}/edit_course_form"><button type="button" class="btn btn-primary">Edit</button></a>
+            <a href="/course/{{ course.id }}/video/create_video_form"><button type="button" class="btn btn-primary">Add Video</button></a>
+        {% endif %}
     </div>
-    <h1>ADD QUIZ FUNCTIONALITY HERE</h1>
+    <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <h1>List of videos</h1>
+                {% for video in course.videos.all %}
+                    <h1>{{ video.title }}</h1>
+                    <p>{{ video.description }}</p>
+                    <p>{{ video.likes|length }}</p>
+                    <a href="/course/{{ course.id }}/video/{{ video.id }}"><button type="button" class="btn btn-primary">Start Video</button></a>
+                    {% endfor %}
+              </div>
+              <div class="col-md-6">
+                <h1>Video</h1>
+                <h1>{{ title }}</h1>
+                <p>{{ description }}</p>
+                <p>{{ likes|length }}</p>
+                <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{ url }}" allowfullscreen></iframe>
+                </div>
+                <h1>ADD QUIZ FUNCTIONALITY HERE</h1>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                </div>
+            </div>
+        </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>
