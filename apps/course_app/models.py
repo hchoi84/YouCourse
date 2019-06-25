@@ -1,5 +1,5 @@
 from django.db import models
-from apps.user_app.models import *
+from apps.user_app.models import User
 
 class CourseManager(models.Manager):
 
@@ -43,7 +43,7 @@ class Course(models.Model):
     subject = models.ForeignKey(Subject,related_name="courses")
     category = models.ForeignKey(Category,related_name="courses")
     description = models.TextField()
-    likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, related_name="courses_liked")
     author = models.ForeignKey(User, related_name="courses_authored")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)

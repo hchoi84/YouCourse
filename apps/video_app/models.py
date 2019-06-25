@@ -24,7 +24,7 @@ class Video(models.Model):
     title = models.CharField(max_length=255)
     url = models.CharField(max_length=255)
     description = models.TextField()
-    likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, related_name="videos_liked")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     course = models.ForeignKey(Course, related_name='videos')
