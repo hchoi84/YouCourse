@@ -53,7 +53,7 @@ $(document).ready(function () {
   });
 
 
-  $(document).on("submit", "form", function (e) {
+  $(document).on("submit", "#register_form", function (e) {
     var error = $('#password_result').html() || $('#register_email_result').html() || $('#lname_result').html() || $('#fname_result').html();
     if (error != "") {
       e.preventDefault();
