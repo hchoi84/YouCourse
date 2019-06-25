@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
+from . import models
 
 def index(request):
 
@@ -9,7 +10,7 @@ def create_video_form(request):
     return render(request, "video_app/create.html")
 
 def create_video_post(request, course_id):
-    if request.method == 'POST':
+    if 'user_id' in request.session and request.method == 'POST':
         Video.objects.create_video(course_id, request.POST)
     return redirect('video')
 
