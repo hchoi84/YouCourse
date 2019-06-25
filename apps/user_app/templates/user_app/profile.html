@@ -12,26 +12,28 @@
 <body>
     <div class="container">
         <div class="profile_img_box">
+            <!-- TODO pulling appropriate image from the DB. Add profile img to DB? -->
             <img class="profile_pic" src="{% static 'user_app/images/profile_pic_placeholder.png' %}" alt="profile image">
         </div>
+        <!-- TODO links to other common pages. (i.e. home, profile, logout, etc) -->
 
         <div class="stats_box">
             <div class="row stats_row">
                 <label class="col-sm-5 col-form-label">Joined On</label>
                 <div class="col-sm-5">
-                    <p type="text" class="form-control-plaintext">2018-05-31</p>
+                    <p type="text" class="form-control-plaintext">{{ user.created_at|date:'Y-m-d' }}</p>
                 </div>
             </div>
             <div class="row stats_row">
                 <label class="col-sm-5 col-form-label">Videos Watched</label>
                 <div class="col-sm-5">
-                    <p type="text" class="form-control-plaintext">11</p>
+                    <p type="text" class="form-control-plaintext">{{ completed|length }}</p>
                 </div>
             </div>
             <div class="row stats_row">
                 <label class="col-sm-5 col-form-label">Courses Created</label>
                 <div class="col-sm-5">
-                    <p type="text" class="form-control-plaintext">3</p>
+                    <p type="text" class="form-control-plaintext">{{ created|length }}</p>
                 </div>
             </div>
         </div>
@@ -41,19 +43,19 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">First Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="staticEmail" value="Bobby">
+                        <input type="text" class="form-control" id="staticEmail" value="{{ user.first_name }}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Last Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="staticEmail" value="Beggins">
+                        <input type="text" class="form-control" id="staticEmail" value="{{ user.last_name }}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="BB@someone.com">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{ user.email }}">
                     </div>
                 </div>
                 <button class="btn-primary">Update</button>
@@ -66,7 +68,20 @@
             </div>
         
             <div class="recently_created_videos">
+                {% for course in created %}
                 <div class="course_video">
+                    <!-- TODO url to the videos page -->
+                    <a href="">
+                        <iframe width="350" height="209"
+                        src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                        </iframe>
+                    </a>
+                    <p class="course_title">{{ course.title|truncatewords:5 }}</p>
+                    <p class="no_margin">{{ course.description|truncatewords:10 }}</p>
+                    <p class="no_margin">{{ course.created_at|date:'Y-m-d' }}</p>
+                </div>
+                {% endfor %}
+                <!-- <div class="course_video">
                     <iframe width="350" height="209"
                     src="https://www.youtube.com/embed/tgbNymZ7vqY">
                     </iframe>
@@ -77,13 +92,7 @@
                     src="https://www.youtube.com/embed/tgbNymZ7vqY">
                     </iframe>
                     <p class="course_title">Course Title</p>
-                </div>
-                <div class="course_video">
-                    <iframe width="350" height="209"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                    </iframe>
-                    <p class="course_title">Course Title</p>
-                </div>
+                </div> -->
             </div>
         </div>
 
