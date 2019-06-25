@@ -21,11 +21,11 @@ $(document).ready(function () {
   })
   $('#register_email').keyup(function (e) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if ( regex.test($('#register_email').val())) {
-      $('#register_email_result').html("");
+    if ( !regex.test($('#register_email').val())) {
+      $('#register_email_result').html("Please enter a valid email");
     }
     else {
-      $('#register_email_result').html("Please enter a valid email");
+      $('#register_email_result').html("");
     }
   })
   $('#confirm_password').keyup(function (e) {
@@ -35,13 +35,15 @@ $(document).ready(function () {
     else {
       $('#password_result').html("");
     }
+  });
+
+  $(document).on("submit", "form", function (e) {
+    var error = $('#password_result').html() || $('#register_email_result').html() || $('#lname_result').html() || $('#fname_result').html();
+    if (error) {
+      e.preventDefault();
+      alert("Please fix all errors before submitting")
+      return false;
+    }
   })
 
-}
-
-
-)
-
-
-
-
+});
