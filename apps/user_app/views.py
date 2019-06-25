@@ -15,7 +15,6 @@ def register_user(request):
 
     # register user
     request.session['uid'] = User.objects.register_user(request.POST)
-    # request.session['hashed_uid'] = User.objects.hash_id(request.session['uid'])
     return redirect("/dashboard")
 
 def login(request):
