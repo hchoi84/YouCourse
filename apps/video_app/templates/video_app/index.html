@@ -7,32 +7,13 @@
     <title>USERS</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'belt_app/style.css' %}">
+    <link rel="stylesheet" href="{% static 'video_app/style.css' %}">
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark justify-content-between">
-            <h6 class="navbar-brand">COURSE DASHBOARD</h6>
-            <div class="menu-buttons form-inline">
-                <form class="nav-item nav-link" action="/belt">
-                    <button type="submit" class="btn btn-danger">HOME</button>
-                </form>
-                <form class="nav-item nav-link" action="/belt/create">
-                    <button type="submit" class="btn btn-danger">CREATE</button>
-                </form>
-                {% if 'user_id' in request.session %}
-                    <form class="nav-item nav-link" action="/logout">
-                        <button type="submit" class="btn btn-danger">LOGOUT</button>
-                    </form>
-                {% else %}
-                    <form class="nav-item nav-link" action="/">
-                        <button type="submit" class="btn btn-danger">LOGIN</button>
-                    </form>
-                {% endif %}
-            </div>
-        </nav>
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="url here" allowfullscreen></iframe>
-        </div>
+    <h1>PAGE IS LOADING</h1>
+    <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>

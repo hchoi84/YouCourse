@@ -4,12 +4,12 @@ from apps.course_app.models import Course
 
 class VideoManager(models.Manager):
     
-    def add_video(self, course_id, form):
+    def create_video(self, course_id, form):
         url = "https://www.youtube.com/embed/" + form['url'].split('=')[-1] #splits the video id out of the full url then concats to the YouTube embed path
-        new_video = self.create(url = url, description = form['description'], likes = 0, course = Course.objects.get(id = course_id))
+        new_video = self.create(title = form['title'], url = url, description = form['description'], likes = 0, course = Course.objects.get(id = course_id))
         return self
     
-    def remove_video(self, video_id):
+    def delete_video(self, video_id):
         video = self.get(id = video_id).delete()
         return self
 
@@ -20,6 +20,7 @@ class VideoManager(models.Manager):
         return self
         
 class Video(models.Model):
+    title = models.CharField(max_length=255)
     url = models.CharField(max_length=255)
     description = models.TextField()
     likes = models.IntegerField()
