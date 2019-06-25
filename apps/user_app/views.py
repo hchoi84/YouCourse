@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import User
+from apps.video_app.models import Video
+from apps.course_app.models import Course
 from django.contrib import messages
 
 def index(request):
@@ -34,13 +36,15 @@ def profile(request, uid):
     # if not 'uid' in request.session:
     #     messages.error(request, "Please log in", extra_tags="log_in")
     #     return redirect("/")
-    # user_info = User.objects.get(id=uid)
-    # context={
-    #     "fname": user_info.first_name,
-    #     "lname": user_info.last_name,
-    #     "em": user_info.email,
-    # }
-    return render(request, "user_app/profile.html")
+    user = User.objects.get(id=uid)
+    completed = Video.objects.filter(users_who_completed=user)
+    created = Course.objects.filter(author=user)
+    context={
+        "user": user,
+        "completed": completed,
+        "created": created,
+    }
+    return render(request, "user_app/profile.html", context)
 
 def logout(request):
     keys = []

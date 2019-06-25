@@ -181,7 +181,7 @@ nav {
     flex-wrap: wrap;
 }
 
-.course_title, .course_creator{
+.course_title, .course_creator, .no_margin{
     margin: 0px;
 }
 
