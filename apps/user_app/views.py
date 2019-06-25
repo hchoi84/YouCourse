@@ -32,11 +32,11 @@ def login(request):
     request.session['user_id'] = User.objects.get(email=request.POST['email']).id
     return redirect("/course")
 
-def profile(request, user_id):
+def profile(request):
     # if not 'user_id' in request.session:
     #     messages.error(request, "Please log in", extra_tags="log_in")
     #     return redirect("/")
-    user = User.objects.get(id=user_id)
+    user = User.objects.get(id=request.session['user_id'])
     # completed = Video.objects.filter(users_who_completed=user)
     # created = Course.objects.filter(author=user)
     # TODO does the below work instead of pulling data from other tables?
@@ -51,7 +51,7 @@ def profile(request, user_id):
 def update_profile(request):
     user_id = request.session['user_id']
     User.objects.process_profile_update(request.POST, user_id)
-    return redirect(f"/profile/{user_id}")
+    return redirect(f"/profile")
 
 def logout(request):
     keys = []
