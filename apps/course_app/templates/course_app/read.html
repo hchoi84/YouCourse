@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>USERS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'video_app/style.css' %}">
+</head>
+<body>
+    <div class="course-header">
+        <h1>{{ course.title }}</h1>
+        <p>Subject: {{ course.subject.name }}</p>
+        <p>Category: {{ course.category.name }}</p>
+        <p>Description: {{ course.description }}</p>
+        <p>Likes: {{ course.likes }}</p>
+    </div>
+    <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <h1>List of videos</h1>
+                {% for video in course.videos.all %}
+                    <h1>{{ video.title }}</h1>
+                    <p>{{ video.description }}</p>
+                    <p>{{ video.likes }}</p>
+                    <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="{{ video.url }}" allowfullscreen></iframe>
+                    </div>
+                    <a href="/video/{{ course.id }}/{{ video.id }}"><button type="button">Start Video</button></a>
+                    {% endfor %}
+              </div>
+              <div class="col-md-6">
+                <h1>Video</h1>
+                <p>Please select a video</p>
+                </div>
+            </div>
+        </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
+</html>

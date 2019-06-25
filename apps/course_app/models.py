@@ -6,9 +6,9 @@ class CourseManager(models.Manager):
 
     def validate(self, form):
         errors = {}
-        if len(form['subject_id']) < 3 or len(form['subject_name']) < 3:
+        if len(form['subject_id']) < 1 and len(form['subject_name']) < 3:
             errors['subject'] = 'Please select a subject'
-        if len(form['category_id']) < 3 or len(form['category_name']) < 3:
+        if len(form['category_id']) < 1 and len(form['category_name']) < 3:
             errors['category'] = 'Please select a category'
         if len(form['title']) < 3:
             errors['title'] = 'Please create a title'
