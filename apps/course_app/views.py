@@ -2,3 +2,29 @@ from django.shortcuts import render, redirect, HttpResponse
 
 def index(request):
     return render(request, "course_app/courses.html")
+
+def create_course_form(request):
+
+    return redirect('course')
+
+def create_course_post(request, course_id):
+
+    return redirect('course')
+
+def read_course(request, video_id):
+
+    return redirect('course')
+
+def delete_course(request, video_id):
+
+    return redirect('course')
+
+# NICE TO HAVE...
+
+def edit_course_form(request):
+    
+    return redirect('course')
+
+def edit_course_post(request):
+
+    return redirect('course')
