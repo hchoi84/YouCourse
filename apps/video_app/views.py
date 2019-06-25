@@ -15,12 +15,12 @@ def create_video_post(request, course_id):
 
 def read_video(request, video_id):
     video = Video.objects.get(id=video_id)
-    context = [
+    context = {
         'title': video.title,
         'url': video.url,
         'description': video.description,
         'likes': video.likes,
-    ]
+    }
     return render(request, "video_app/add.html", context)
 
 def delete_video(request, video_id):
