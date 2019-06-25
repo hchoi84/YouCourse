@@ -4,14 +4,24 @@ def index(request):
 
     return render(request, "video_app/index.html")
 
-def add_video_form(request):
+def create_video_form(request):
 
-    return render(request, "video_app/add.html")
+    return render(request, "video_app/create.html")
 
-def add_video_post(request, course_id):
+def create_video_post(request, course_id):
     if request.method == 'POST':
         Video.objects.create_video(course_id, request.POST)
     return redirect('video')
+
+def read_video(request, video_id):
+    video = Video.objects.get(id=video_id)
+    context = [
+        'title': video.title,
+        'url': video.url,
+        'description': video.description,
+        'likes': video.likes,
+    ]
+    return render(request, "video_app/add.html", context)
 
 def delete_video(request, video_id):
     if request.session['user_id'] == Video.objects.get(id=video_id).User.id:
