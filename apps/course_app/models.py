@@ -1,7 +1,6 @@
 from django.db import models
 from apps.user_app.models import *
 
-
 class CourseManager(models.Manager):
 
     def validate(self, form):
@@ -26,8 +25,8 @@ class CourseManager(models.Manager):
 
     def edit_course(self, course_id, form):
         course = self.get(id = course_id)
-        course.subject = form['subject']
-        course.category = form['category']
+        course.subject = Subject.objects.get(id=form['subject_id'])
+        course.category = Category.objects.get(id=form['category_id'])
         course.title = form['title']
         course.description = form['description']
         course.save()
