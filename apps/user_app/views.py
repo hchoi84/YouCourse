@@ -27,7 +27,7 @@ def login(request):
         for key, value in errors.items():
             messages.error(request, value, extra_tags=key)
         return redirect("/")
-     
+        
     # login
     request.session['user_id'] = User.objects.get(email=request.POST['email']).id
     return redirect("/course")

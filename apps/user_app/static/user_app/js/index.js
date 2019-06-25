@@ -36,7 +36,7 @@ $(document).ready(function () {
         method: "POST",
         data: data
       })
-      .done(function(res){
+      .done(function(res) {
           $('#register_email_result').html(res);
       })
     }
