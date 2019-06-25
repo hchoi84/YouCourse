@@ -15,6 +15,7 @@
             <!-- TODO pulling appropriate image from the DB. Add profile img to DB? -->
             <img class="profile_pic" src="{% static 'user_app/images/profile_pic_placeholder.png' %}" alt="profile image">
         </div>
+        <!-- TODO links to other common pages. (i.e. home, profile, logout, etc) -->
 
         <div class="stats_box">
             <div class="row stats_row">
@@ -69,9 +70,12 @@
             <div class="recently_created_videos">
                 {% for course in created %}
                 <div class="course_video">
-                    <iframe width="350" height="209"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                    </iframe>
+                    <!-- TODO url to the videos page -->
+                    <a href="">
+                        <iframe width="350" height="209"
+                        src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                        </iframe>
+                    </a>
                     <p class="course_title">{{ course.title|truncatewords:5 }}</p>
                     <p class="no_margin">{{ course.description|truncatewords:10 }}</p>
                     <p class="no_margin">{{ course.created_at|date:'Y-m-d' }}</p>
