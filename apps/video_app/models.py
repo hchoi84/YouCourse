@@ -10,13 +10,14 @@ class VideoManager(models.Manager):
         return self
     
     def delete_video(self, video_id):
-        video = self.get(id = video_id).delete()
+        self.get(id = video_id).delete()
         return self
 
     def edit_video(self, video_id, form):
         video = self.get(id = video_id)
         video.url = form['url']
         video.description = form['description']
+        video.save()
         return self
         
 class Video(models.Model):

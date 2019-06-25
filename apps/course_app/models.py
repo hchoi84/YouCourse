@@ -9,7 +9,7 @@ class CourseManager(models.Manager):
         return self
     
     def delete_course(self, course_id):
-        video = self.get(id = course_id).delete()
+        self.get(id = course_id).delete()
         return self
 
     def edit_course(self, course_id, form):
@@ -18,6 +18,7 @@ class CourseManager(models.Manager):
         course.category = form['category']
         course.title = form['title']
         course.description = form['description']
+        course.save()
         return self
 
 
