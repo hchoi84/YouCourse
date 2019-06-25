@@ -1,6 +1,6 @@
-/* *{
+*{
     border: 1px dotted red;
-} */
+}
 
 .container{
     padding-top: 30px;
@@ -189,3 +189,23 @@ nav {
     margin-bottom: 15px;
 }
 /* end courses.html new course section */
+
+/* begin profile page focused styling */
+.profile_pic{
+  width: 200px;
+  height: 200px;
+}
+.profile_img_box, .stats_box{
+  display: inline-block;
+}
+.profile_img_box{
+  vertical-align: top;
+}
+.stats_row{
+  width: 400px;
+  margin-left: 20px;
+}
+.profile_box{
+  margin-top: 20px;
+}
+/* end profile page focused styling */
