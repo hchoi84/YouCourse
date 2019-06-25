@@ -16,6 +16,9 @@
         <p>Category: {{ course.category.name }}</p>
         <p>Description: {{ course.description }}</p>
         <p>Likes: {{ course.likes }}</p>
+        {% if author %}
+            <a href="/course/{{ course.id }}/edit_course_form"><button type="button" class="btn btn-primary">Edit</button></a>
+        {% endif %}
     </div>
     <div class="container">
             <div class="row">
