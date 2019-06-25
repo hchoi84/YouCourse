@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>USERS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'video_app/style.css' %}">
+</head>
+<body>
+    <h1>Edit Course</h1>
+    {% if messages %}
+    {% for message in messages %}
+            <p>{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    <form action="edit_course_post" method="POST">{% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input name="title" type="text" class="form-control" id="title" value="{{ title }}">
+        </div>
+        <div class="form-group">
+            <label for="subject_id">Select Subject</label>
+            <select name="subject_id" class="form-control" id="subject_id">
+                <option value="{{ subject.id }}">{{ subject.name }}</option>
+                {% for subject in subjects %}
+                <option value="{{ subject.id }}" >{{ subject.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="category_id">Select Category</label>
+            <select name="category_id" class="form-control" id="category_id">
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}" >{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" class="form-control" id="description" rows="3">{{ description }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/course/{{ course_id }}/delete_course"><button type="button" class="btn btn-danger">Delete</button></a> 
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
+</html>
