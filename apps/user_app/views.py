@@ -61,3 +61,8 @@ def logout(request):
         del request.session[key]
     return redirect("/")
 # endregion
+
+def email_check(request):
+    if User.objects.filter(email=request.POST['email']):
+        return HttpResponse("That email is already in use")
+    return HttpResponse("")
