@@ -15,7 +15,7 @@ def register_user(request):
 
     # register user
     request.session['uid'] = User.objects.register_user(request.POST)
-    return redirect("/dashboard")
+    return redirect("/courses")
 
 def login(request):
     # validate login info
@@ -28,7 +28,7 @@ def login(request):
     # login
     request.session['uid'] = User.objects.get(email=request.POST['email']).id
     # request.session['hashed_uid'] = str(User.objects.hash_id(request.session['uid']))
-    return redirect("/dashboard")
+    return redirect("/courses")
 
 def user_page(request, uid):
     if not 'uid' in request.session:
@@ -38,13 +38,11 @@ def user_page(request, uid):
     # hashed = request.session['hashed_uid']
     # if not User.objects.user_validator(uid, hashed):
     #     return redirect("/")
-    user_info = User.objects.get_user_info(uid)
+    user_info = User.objects.get(id=uid)
     context={
         "fname": user_info.first_name,
         "lname": user_info.last_name,
         "em": user_info.email,
-        # "reviews": len(user_info.reviews.all()),
-        # "reviewed_books": user_info.reviews.all(),
     }
     return render(request, "/login/user.html", context)
 

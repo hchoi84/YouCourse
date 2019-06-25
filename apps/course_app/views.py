@@ -1,4 +1,4 @@
 from django.shortcuts import render, redirect, HttpResponse
 
 def index(request):
-    return HttpResponse("course page")
+    return render(request, "course_app/courses.html")
