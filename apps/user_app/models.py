@@ -29,7 +29,7 @@ class UserManager(models.Manager):
             first_name = postData['first_name'],
             last_name = postData['last_name'],
             email = postData['email'],
-            password = hashed_pswd
+            password_hash = hashed_pswd
         ).id
 
     def login_validator(self, postData):
@@ -38,16 +38,13 @@ class UserManager(models.Manager):
         if not exists:
             errors['login_email_error'] = "Email does not exist"
             return errors
-        if not bcrypt.checkpw(postData['password'].encode(), exists[0].password.encode()):
+        if not bcrypt.checkpw(postData['password'].encode(), exists[0].password_hash.encode()):
             errors['login_pswd_error'] = "Password does not match"
             return errors
         return errors
     
     def hash_id(self, uid):
         return bcrypt.hashpw(str(uid).encode(), bcrypt.gensalt())
-
-    def get_user_info(self, uid):
-        return self.get(id=uid)
 
 class User(models.Model):
     first_name = models.CharField(max_length=45)
