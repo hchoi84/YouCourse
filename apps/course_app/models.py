@@ -1,6 +1,7 @@
 from django.db import models
 from apps.user_app.models import *
 
+
 class CourseManager(models.Manager):
 
     def create_course(self, user_id, form):
@@ -20,13 +21,23 @@ class CourseManager(models.Manager):
         course.save()
         return self
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+
+
+class Subject(models.Model):
+    name = models.CharField(max_length=255)
+
+
 class Course(models.Model):
     title = models.CharField(max_length=255)
-    subject = models.CharField(max_length=255)
-    category = models.CharField(max_length=255)
+    subject = models.ForeignKey(Subject,related_name="courses")
+    category = models.ForeignKey(Category,related_name="courses")
     description = models.TextField()
     likes = models.IntegerField(default=0)
     author = models.ForeignKey(User, related_name="courses_authored")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     objects = CourseManager()
+
