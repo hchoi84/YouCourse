@@ -43,8 +43,12 @@ class UserManager(models.Manager):
             return errors
         return errors
     
-    def hash_id(self, uid):
-        return bcrypt.hashpw(str(uid).encode(), bcrypt.gensalt())
+    def process_profile_update(self, postData, user_id):
+        user = self.get(id=user_id)
+        user.first_name= postData['first_name']
+        user.last_name = postData['last_name']
+        user.save()
+        return
 
 class User(models.Model):
     first_name = models.CharField(max_length=45)
