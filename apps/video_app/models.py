@@ -17,8 +17,6 @@ class VideoManager(models.Manager):
         video.url = form['url']
         video.description = form['description']
         
-
-
 class Video(models.Model):
     url = models.CharField(max_length=255)
     description = models.TextField()
