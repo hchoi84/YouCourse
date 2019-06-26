@@ -25,11 +25,12 @@ class VideoManager(models.Manager):
 
     def edit_video(self, video_id, form):
         video = self.get(id = video_id)
+        video.title = form['title']
         video.url = form['url']
         video.description = form['description']
         video.save()
         return self
-        
+   
 class Video(models.Model):
     title = models.CharField(max_length=255)
     url = models.CharField(max_length=255)

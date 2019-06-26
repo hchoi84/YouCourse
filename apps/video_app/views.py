@@ -35,20 +35,27 @@ def read_video(request, course_id, video_id):
     return render(request, "video_app/read.html", context)
 
 def delete_video(request, course_id, video_id):
-    if request.session['user_id'] == Video.objects.get(id=video_id).User.id:
+    if 'user_id' in request.session and request.session['user_id'] == Video.objects.get(id=video_id).course.author.id:
         Video.objects.delete_video(video_id)
-    return redirect('video')
+    return redirect(f'/course/{course_id}')
 
 def edit_video_form(request, course_id, video_id):
     video = Video.objects.get(id=video_id)
     context = {
-        'title': video.title,
-        'url': video.url,
-        'description': video.description,
-        'likes': video.likes,
+        'video': Video.objects.get(id=video_id),
+        'course': Course.objects.get(id=course_id),
     }
-    return render(request, "video_app/add.html", context)
+    return render(request, "video_app/edit.html", context)
 
 def edit_video_post(request, course_id, video_id):
-
-    return redirect('video')
+    if 'user_id' in request.session and request.session['user_id'] == Video.objects.get(id=video_id).course.author.id and request.method == 'POST':
+        errors = Video.objects.validate(request.POST)
+        if not errors:
+            Video.objects.edit_video(video_id, request.POST)
+            return redirect(f'/course/{course_id}/video/{video_id}')
+        else:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags=key)
+            return redirect(f'/course/{course_id}/edit_video_form')
+    messages.error(request, 'You are not the author of this course', extra_tags='user_id')
+    return redirect(f'/course/{course_id}/video/{video_id}')
