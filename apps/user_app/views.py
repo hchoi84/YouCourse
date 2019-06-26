@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import User
 # TODO if the logic in profile method works, remove the below 2 imports
 from apps.video_app.models import Video
-from apps.course_app.models import Course
+from apps.course_app.models import Course, Category
 from django.contrib import messages
 
 def index(request):
@@ -51,7 +51,7 @@ def profile(request):
 def update_profile(request):
     user_id = request.session['user_id']
     User.objects.process_profile_update(request.POST, user_id)
-    return redirect(f"/profile")
+    return redirect("/profile")
 
 def logout(request):
     keys = []

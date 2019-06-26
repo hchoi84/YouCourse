@@ -10,6 +10,9 @@
 .welcome_box, .box_header{
     margin-bottom: 30px;
 }
+.center_content{
+  text-align: center;
+}
 
 .box{
     margin: auto;
@@ -71,7 +74,20 @@ input[type=number]::-webkit-outer-spin-button {
     color: red;
 }
 
+.main_banner{
+  width: auto;
+  height: 150px;
+  background: url("../images/main_banner.jpg") center center no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
 /* begin style for nav */
+.nav_box{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 nav {    
     display: block;
     text-align: center;
