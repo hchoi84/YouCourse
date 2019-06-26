@@ -5,19 +5,19 @@ class QuestionManager(models.Manager):
 
     def validate(self, form):
         errors = {}
-        if len(form['question']) < 3:
+        if len(form['question']) < 1:
             errors['question'] = 'Please enter a question.'
-        if len(form['option1']) < 3:
+        if len(form['option1']) < 1:
             errors['option1'] = 'Please enter an answer.'
-        if len(form['option2']) < 3:
+        if len(form['option2']) < 1:
             errors['option2'] = 'Please enter an answer.'
-        if len(form['option3']) < 3:
+        if len(form['option3']) < 1:
             errors['option3'] = 'Please enter an answer.'
-        if len(form['option4']) < 3:
+        if len(form['option4']) < 1:
             errors['option4'] = 'Please enter an answer.'
-        if len(form['option5']) < 3:
+        if len(form['option5']) < 1:
             errors['option5'] = 'Please enter an answer.'
-        if len(form['answer']) < 3:
+        if len(form['answer']) < 1:
             errors['answer'] = 'Please enter an answer.'
         return errors
 
