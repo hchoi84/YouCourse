@@ -24,8 +24,8 @@
             <h4>Question 4:</h4>
             <div class="funkyradio">
                 <div class="funkyradio-primary">
-                    <input type="radio" name="4" id="4A" value="A"/>
-                    <label for="4A" >Second Option primary</label>
+                    <input type="radio" name="{{ question.id }}" id="{{ question.id }}_A" value="A"/>
+                    <label for="{{ question.id }}_A" > {{ question.option1 }}</label>
                 </div>
                 <div class="funkyradio-primary">
                     <input type="radio" name="4" id="4B" value="B"/>
