@@ -20,7 +20,7 @@ def create_course_post(request):
     if 'user_id' in request.session and request.method == 'POST': #user is logged in and method is post
         errors = Course.objects.validate(request.POST)
         if not errors:
-            if request.POST['subject_id']: #subject chosen
+            if not request.POST['subject_id'] == 'add': #subject chosen
                 if request.POST['category_id']: #subject chosen category chosen
                     subject_id = request.POST['subject_id']
                     category_id = request.POST['category_id']
