@@ -1,6 +1,6 @@
-*{
+/* *{
     border: 1px dotted red;
-}
+} */
 
 .container{
     padding-top: 30px;
@@ -9,6 +9,20 @@
 }
 .welcome_box, .box_header{
     margin-bottom: 30px;
+}
+.elegantshadow {
+  color: #131313;
+  letter-spacing: .15em;
+  text-shadow: 
+    -1px 2px 1px #737272, 
+    -2px 4px 1px #767474, 
+    -3px 6px 1px #787777, 
+    -4px 8px 1px #7b7a7a, 
+    -5px 10px 1px #7f7d7d, 
+    -6px 12px 1px #828181, 
+    -7px 14px 1px #868585, 
+    -8px 16px 1px #8b8a89, 
+    -9px 18px 1px #8f8e8d 
 }
 .center_content{
   text-align: center;
@@ -77,9 +91,16 @@ input[type=number]::-webkit-outer-spin-button {
 .main_banner{
   width: auto;
   height: 150px;
-  background: url("../images/main_banner.jpg") center center no-repeat;
-  background-size: cover;
+
   position: relative;
+}
+
+.background_img{
+  height: 100%;
+  width: 100%;
+  background: url("../images/main_banner.jpg") center center no-repeat;
+  background-size: cover; 
+  opacity: 0.6;
 }
 
 /* begin style for nav */
