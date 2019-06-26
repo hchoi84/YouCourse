@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>USERS</title>
+    <title>Edit Video</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'video_app/style.css' %}">
@@ -70,7 +70,28 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <h1>QUESTION TABLE HERE</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Question</th>
+                <th scope="col">Answer</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+                <tr>
+                    <th scope="row">{{ question.question }}</th>
+                    <td>{{ question.answer }}</td>
+                    <td>
+                        <a href="/course/{{ course.id }}/video/{{ video.id }}/question/{{ question.id }}/edit_question_form"><button class="btn btn-primary" type="button" >Edit</button></a>
+                        <a href="/course/{{ course.id }}/video/{{ video.id }}/question/{{ question.id }}/delete_question"><button type="button" class="btn btn-danger">Delete</button></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>

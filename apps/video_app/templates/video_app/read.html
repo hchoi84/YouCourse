@@ -24,7 +24,6 @@
     <div class="container">
             <div class="row">
               <div class="col-md-3">
-                <h1>List of videos</h1>
                 {% for video in course.videos.all %}
                     <h1>{{ video.title }}</h1>
                     <img src="{{ video.thumbnail }}" class="img-fluid" alt="">
@@ -37,7 +36,6 @@
                     {% endfor %}
               </div>
               <div class="col-md-9">
-                <h1>Video</h1>
                 <h1>{{ title }}</h1>
                 <p>{{ description }}</p>
                 <p>Likes: {{ likes|length }}</p>

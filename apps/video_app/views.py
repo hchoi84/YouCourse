@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from apps.video_app.models import Video
 from apps.course_app.models import Course, Subject, Category
+from apps.quiz_app.models import Question
 from django.contrib import messages
 
 def create_video_form(request, course_id):
@@ -44,6 +45,7 @@ def edit_video_form(request, course_id, video_id):
     context = {
         'video': Video.objects.get(id=video_id),
         'course': Course.objects.get(id=course_id),
+        'questions': Question.objects.filter(video = Video.objects.get(id=video_id)),
     }
     return render(request, "video_app/edit.html", context)
 
