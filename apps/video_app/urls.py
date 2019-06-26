@@ -8,4 +8,5 @@ urlpatterns=[
     url(r'^(?P<course_id>\d+)/video/(?P<video_id>\d+)/edit_video_form$', views.edit_video_form),
     url(r'^(?P<course_id>\d+)/video/(?P<video_id>\d+)/edit_video_post$', views.edit_video_post),
     url(r'^(?P<course_id>\d+)/video/(?P<video_id>\d+)/delete_video$', views.delete_video),
+    url(r'^(?P<course_id>\d+)/video/(?P<video_id>\d+)/quiz_post$', views.quiz_post),
 ]
