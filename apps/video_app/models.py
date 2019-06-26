@@ -15,8 +15,9 @@ class VideoManager(models.Manager):
         return errors
 
     def create_video(self, course_id, form):
+        thumbnail = "https://img.youtube.com/vi/" + form['url'].split('=')[-1] + "/0.jpg" #splits the video id out of the full url then concats to the YouTube thumbnail path
         url = "https://www.youtube.com/embed/" + form['url'].split('=')[-1] #splits the video id out of the full url then concats to the YouTube embed path
-        new_video = self.create(title = form['title'], url = url, description = form['description'], course = Course.objects.get(id = course_id))
+        new_video = self.create(title = form['title'], thumbnail = thumbnail, url = url, description = form['description'], course = Course.objects.get(id = course_id))
         return new_video
     
     def delete_video(self, video_id):
@@ -33,6 +34,7 @@ class VideoManager(models.Manager):
    
 class Video(models.Model):
     title = models.CharField(max_length=255)
+    thumbnail = models.CharField(max_length=255)
     url = models.CharField(max_length=255)
     description = models.TextField()
     likes = models.ManyToManyField(User, related_name="videos_liked")
