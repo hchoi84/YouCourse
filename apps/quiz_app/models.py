@@ -1,10 +1,45 @@
 from django.db import models
 from apps.video_app.models import *
 
-
-# Create your models here.
 class QuestionManager(models.Manager):
-    pass
+
+    def validate(self, form):
+        errors = {}
+        if len(form['question']) < 3:
+            errors['question'] = 'Please enter a question.'
+        if len(form['option1']) < 3:
+            errors['option1'] = 'Please enter an answer.'
+        if len(form['option2']) < 3:
+            errors['option2'] = 'Please enter an answer.'
+        if len(form['option3']) < 3:
+            errors['option3'] = 'Please enter an answer.'
+        if len(form['option4']) < 3:
+            errors['option4'] = 'Please enter an answer.'
+        if len(form['option5']) < 3:
+            errors['option5'] = 'Please enter an answer.'
+        if len(form['answer']) < 3:
+            errors['answer'] = 'Please enter an answer.'
+        return errors
+
+    def create_question(self, video_id, form):
+        new_question = self.create(question = form['question'], option1 = form['option1'], option2 = form['option2'], option3 = form['option3'], option4 = form['option4'], option5 = form['option5'], answer = form['answer'],video = Video.objects.get(id = video_id))
+        return new_question
+    
+    def delete_question(self, question_id):
+        self.get(id = question_id).delete()
+        return self
+
+    def edit_question(self, question_id, form):
+        question = self.get(id = question_id)
+        question.question = form['question']
+        question.option1 = form['option1']
+        question.option2 = form['option2']
+        question.option3 = form['option3']
+        question.option4 = form['option4']
+        question.option5 = form['option5']
+        question.answer = form['answer']
+        question.save()
+        return self
 
 
 class Question(models.Model):
@@ -15,7 +50,7 @@ class Question(models.Model):
     option4 = models.CharField(max_length=255)
     option5 = models.CharField(max_length=255)
     answer = models.CharField(max_length=255)
+    video = models.ForeignKey(Video, related_name="videos")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
-    video = models.ForeignKey(Video, related_name="videos")
     objects = QuestionManager()
