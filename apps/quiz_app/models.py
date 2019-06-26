@@ -3,6 +3,14 @@ from apps.video_app.models import *
 
 class QuestionManager(models.Manager):
 
+    def quiz_validate(self, video_id, form):
+        errors = {}
+        questions = self.filter(video=Video.objects.get(id=video_id))
+        for question in questions:
+            if not str(question.id) in form:
+                errors[str(question.id)] = 'Please enter an answer.'
+        return errors
+
     def validate(self, form):
         errors = {}
         if len(form['question']) < 1:
@@ -22,7 +30,7 @@ class QuestionManager(models.Manager):
         return errors
 
     def create_question(self, video_id, form):
-        new_question = self.create(question = form['question'], option1 = form['option1'], option2 = form['option2'], option3 = form['option3'], option4 = form['option4'], option5 = form['option5'], answer = form['answer'],video = Video.objects.get(id = video_id))
+        new_question = self.create(question = form['question'], option1 = form['option1'], option2 = form['option2'], option3 = form['option3'], option4 = form['option4'], option5 = form['option5'], answer = form['answer'],video = Video.objects.get(id=video_id))
         return new_question
     
     def delete_question(self, question_id):
