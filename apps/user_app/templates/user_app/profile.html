@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="row stats_row">
-                <label class="col-sm-5 col-form-label">Videos Watched</label>
+                <label class="col-sm-5 col-form-label">Videos Completed</label>
                 <div class="col-sm-5">
                     <p type="text" class="form-control-plaintext">{{ completed|length }}</p>
                 </div>
@@ -71,8 +71,7 @@
             <div class="recently_created_videos">
                 {% for course in created %}
                 <div class="course_video">
-                    <!-- TODO url to the videos page -->
-                    <a href="">
+                    <a href="/course/{{course.id}}">
                         <iframe width="350" height="209"
                         src="https://www.youtube.com/embed/tgbNymZ7vqY">
                         </iframe>
@@ -82,18 +81,6 @@
                     <p class="no_margin">{{ course.created_at|date:'Y-m-d' }}</p>
                 </div>
                 {% endfor %}
-                <!-- <div class="course_video">
-                    <iframe width="350" height="209"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                    </iframe>
-                    <p class="course_title">Course Title</p>
-                </div>
-                <div class="course_video">
-                    <iframe width="350" height="209"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                    </iframe>
-                    <p class="course_title">Course Title</p>
-                </div> -->
             </div>
         </div>
 

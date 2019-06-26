@@ -26,6 +26,7 @@
                     <li><a href="/course">Home</a></li>
                     <li><a href="#">Category</a>
                         <ul>
+                            <!-- TODO JQuery to update the courses content once a category has been selected -->
                             {% for cat in category %}
                             <li><a href="#">{{category.name}}</a></li>
                             {% endfor %}
@@ -62,7 +63,7 @@
         </div>
         </div>
 
-        <!-- Utilize the same section but change the wording and video output when a category is clicked -->
+        <!-- TODO utilize the same section but change the wording and video output when a category is clicked -->
         <div class="recently_created_box">
             <div class="recently_created_header center_content">
                 <h3>Recently created courses</h3>
@@ -79,29 +80,9 @@
                     </a>
                     <p class="course_title">{{ course.title }}</p>
                     <p class="course_creator">{{ course.author.first_name}}</p>
+                    <p class="course_created_at">{{ course.created_at}}</p>
                 </div>
                 {% endfor %}
-                <!-- <div class="course_video">
-                    <iframe width="350" height="209"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                    </iframe>
-                    <p class="course_title">Course Title</p>
-                    <p class="course_creator">Created By</p>
-                </div>
-                <div class="course_video">
-                    <iframe width="350" height="209"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                    </iframe>
-                    <p class="course_title">Course Title</p>
-                    <p class="course_creator">Created By</p>
-                </div>
-                <div class="course_video">
-                    <iframe width="350" height="209"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                    </iframe>
-                    <p class="course_title">Course Title</p>
-                    <p class="course_creator">Created By</p>
-                </div> -->
             </div>
         </div>
 
