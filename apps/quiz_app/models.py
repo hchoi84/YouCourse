@@ -41,7 +41,6 @@ class QuestionManager(models.Manager):
         question.save()
         return self
 
-
 class Question(models.Model):
     question = models.CharField(max_length=255)
     option1 = models.CharField(max_length=255)
