@@ -3,7 +3,11 @@ from apps.course_app.models import Course, Subject, Category
 from django.contrib import messages
 
 def index(request):
-    return render(request, "course_app/courses.html")
+    context={
+        "category": Category.objects.all(),
+        "courses": Course.objects.all().order_by('-created_at')[:6],
+    }
+    return render(request, "course_app/courses.html", context)
 
 def create_course_form(request):
     context = {

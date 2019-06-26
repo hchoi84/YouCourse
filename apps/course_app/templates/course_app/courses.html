@@ -14,57 +14,73 @@
 </head>
 <body>
     <div class="container">
-        <div class="welcome_box">
+        <div class="welcome_box center_content">
             <h1>Welcome to Learn With YouTube!</h1>
         </div>
 
-        <nav>
-            <ul class="nav">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Portfolio</a>
-                <ul>
-                    <li><a href="#">item</a></li>
-                    <li><a href="#">item</a></li>
-                    <li><a href="#">item</a></li>
-                    <li><a href="#">item</a></li>
-                </ul>
-                </li>
-                <li><a href="#">Resume</a>
-                <ul>
-                    <li><a href="#">item a lonng submenu</a></li>
-                    <li><a href="#">item</a>
-                    <ul>
-                        <li><a href="#">Ray</a></li>
-                        <li><a href="#">Veronica</a></li>
-                        <li><a href="#">Bushy</a></li>
-                        <li><a href="#">Havoc</a></li>
-                    </ul>
+        <div class="main_banner">
+            <div class="nav_box">
+            <nav>
+                <ul class="nav">
+                    <li><a href="/course">Home</a></li>
+                    <li><a href="#">Category</a>
+                        <ul>
+                            {% for cat in category %}
+                            <li><a href="#">{{category.name}}</a></li>
+                            {% endfor %}
+                        </ul>
                     </li>
-                    <li><a href="#">item</a></li>
-                    <li><a href="#">item</a></li>
+                    <li><a href="/course/create_course_form">Create</a></li>
+                    <!-- <li><a href="#">Resume</a>
+                        <ul>
+                            <li><a href="#">item a lonng submenu</a></li>
+                            <li><a href="#">item</a>
+                                <ul>
+                                    <li><a href="#">Ray</a></li>
+                                    <li><a href="#">Veronica</a></li>
+                                    <li><a href="#">Bushy</a></li>
+                                    <li><a href="#">Havoc</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">item</a></li>
+                            <li><a href="#">item</a></li>
+                        </ul>
+                    </li> -->
+                    <!-- <li><a href="#">Download</a></li> -->
+                    <!-- <li><a href="#">Rants</a>
+                        <ul>
+                            <li><a href="#">item</a></li>
+                            <li><a href="#">item</a></li>
+                            <li><a href="#">item</a></li>
+                            <li><a href="#">item</a></li>
+                        </ul>
+                    </li> -->
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
-                </li>
-                <li><a href="#">Download</a></li>
-                <li><a href="#">Rants</a>
-                <ul>
-                    <li><a href="#">item</a></li>
-                    <li><a href="#">item</a></li>
-                    <li><a href="#">item</a></li>
-                    <li><a href="#">item</a></li>
-                </ul>
-                </li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+            </nav>
+        </div>
+        </div>
 
         <!-- Utilize the same section but change the wording and video output when a category is clicked -->
         <div class="recently_created_box">
-            <div class="recently_created_header">
+            <div class="recently_created_header center_content">
                 <h3>Recently created courses</h3>
             </div>
         
             <div class="recently_created_videos">
+                {% for course in courses %}
                 <div class="course_video">
+                    <!-- <iframe width="350" height="209"
+                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                    </iframe> -->
+                    <a href="/course/{{ course.id }}">
+                        <img src="{% static 'user_app/images/course_img_placeholder.png' %}" alt="Course thumbnail" width='350' height='209'>
+                    </a>
+                    <p class="course_title">{{ course.title }}</p>
+                    <p class="course_creator">{{ course.author.first_name}}</p>
+                </div>
+                {% endfor %}
+                <!-- <div class="course_video">
                     <iframe width="350" height="209"
                     src="https://www.youtube.com/embed/tgbNymZ7vqY">
                     </iframe>
@@ -84,14 +100,7 @@
                     </iframe>
                     <p class="course_title">Course Title</p>
                     <p class="course_creator">Created By</p>
-                </div>
-                <div class="course_video">
-                    <iframe width="350" height="209"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                    </iframe>
-                    <p class="course_title">Course Title</p>
-                    <p class="course_creator">Created By</p>
-                </div>
+                </div> -->
             </div>
         </div>
 
