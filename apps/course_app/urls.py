@@ -9,4 +9,5 @@ urlpatterns=[
     url(r'^(?P<course_id>\d+)/edit_course_form$', views.edit_course_form),
     url(r'^(?P<course_id>\d+)/edit_course_post$', views.edit_course_post),
     url(r'^(?P<course_id>\d+)/delete_course$', views.delete_course),
+    url(r'^(?P<course_id>\d+)/like_course$', views.like_course),
 ]

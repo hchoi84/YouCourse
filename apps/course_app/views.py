@@ -80,3 +80,8 @@ def edit_course_post(request, course_id):
             return redirect(f'/course/{course_id}/edit_course_form')
     messages.error(request, 'You are not the author of this course.', extra_tags='user_id')
     return redirect(f'/course/{course_id}')
+
+def like_course(request, course_id):
+    if 'user_id' in request.session:
+        Course.objects.like_course(course_id, request.session['user_id'])
+    return redirect(f'/course/{course_id}')

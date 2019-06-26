@@ -87,3 +87,8 @@ def quiz_post(request, course_id, video_id):
             return redirect(f'/course/{course_id}/video/{video_id}')
     messages.error(request, 'Something went wrong', extra_tags='user_id')
     return redirect(f'/course/{course_id}/video/{video_id}')
+
+def like_video(request, course_id, video_id):
+    if 'user_id' in request.session:
+        Video.objects.like_video(video_id, request.session['user_id'])
+    return redirect(f'/course/{course_id}/video/{video_id}')

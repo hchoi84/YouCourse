@@ -18,7 +18,7 @@
             <p>Subject: {{ course.subject.name }}</p>
             <p>Category: {{ course.category.name }}</p>
             <p>Description: {{ course.description }}</p>
-            <p>Likes: {{ course.likes|length }}</p>
+            <p>Likes: {{ course.likes.all|length }} <a href="/course/{{ course.id }}/like_course"><button type="button" class="btn btn-primary">Like</button></a></p>
             {% if author %}
                 <a href="/course/{{ course.id }}/edit_course_form"><button type="button" class="btn btn-primary">Edit</button></a>
                 <a href="/course/{{ course.id }}/video/create_video_form"><button type="button" class="btn btn-primary">Add Video</button></a>
