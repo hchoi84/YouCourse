@@ -27,6 +27,7 @@
                 <h1>List of videos</h1>
                 {% for video in course.videos.all %}
                     <h1>{{ video.title }}</h1>
+                    <img src="{{ video.thumbnail }}" class="img-fluid" alt="">
                     <p>{{ video.description }}</p>
                     <p>Likes: {{ video.likes|length }}</p>
                     <a href="/course/{{ course.id }}/video/{{ video.id }}"><button type="button" class="btn btn-primary">Start Video</button></a>
