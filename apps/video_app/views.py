@@ -68,7 +68,7 @@ def delete_video(request, course_id, video_id):
     return redirect(f'/course/{course_id}')
 
 def edit_video_form(request, course_id, video_id):
-    if 'user_id' in request.session and request.session['user_id'] == Video.objects.get(id=video_id).course.author.id and request.method == 'POST':
+    if 'user_id' in request.session and request.session['user_id'] == Video.objects.get(id=video_id).course.author.id:
         video = Video.objects.get(id=video_id)
         context = {
             'video': Video.objects.get(id=video_id),
@@ -76,7 +76,7 @@ def edit_video_form(request, course_id, video_id):
             'questions': Question.objects.filter(video = Video.objects.get(id=video_id)),
         }
         return render(request, "video_app/edit.html", context)
-    messages.error(request, 'You are not the author of this course', extra_tags='user_id')
+    messages.error(request, 'You are not the author of this video', extra_tags='user_id')
     return redirect(f'/course/{course_id}/video/{video_id}')
 
 def edit_video_post(request, course_id, video_id):

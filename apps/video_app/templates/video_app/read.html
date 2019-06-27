@@ -41,11 +41,15 @@
 
         <!-- begin header section -->
         <div class="course-header">
+            {% if course_passed %}
+            <h1>{{ course.title }} <span class="passed"> [Course Passed] </span></h1>
+            {% else %}
             <h1>{{ course.title }}</h1>
+            {% endif %}
             <p>Subject: {{ course.subject.name }}</p>
             <p>Category: {{ course.category.name }}</p>
             <p>Description: {{ course.description }}</p>
-            <p>Likes: {{ course.likes.all|length }}</p>
+            <p>Likes: {{ course.likes.all|length }} <a href="/course/{{ course.id }}/like_course"><button type="button" class="btn btn-primary">Like</button></a></p>
             {% if author %}
                 <a href="/course/{{ course.id }}/edit_course_form"><button type="button" class="btn btn-primary">Edit</button></a>
                 <a href="/course/{{ course.id }}/video/create_video_form"><button type="button" class="btn btn-primary">Add Video</button></a>
@@ -123,8 +127,8 @@
                             {% endif %}
                         {% endfor %}
                         {% endif %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     {% endfor %}
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>

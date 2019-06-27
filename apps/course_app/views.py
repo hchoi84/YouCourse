@@ -80,17 +80,20 @@ def delete_course(request, course_id):
     return redirect('/course')
 
 def edit_course_form(request, course_id):
-    course = Course.objects.get(id = course_id)
-    context = {
-        'course_id': course.id,
-        'title': course.title,
-        'subject': course.subject,
-        'category': course.category,
-        'description': course.description,
-        'categories': Category.objects.all(),
-        'subjects': Subject.objects.all(),
-    }
-    return render(request, "course_app/edit.html", context)
+    if 'user_id' in request.session and request.session['user_id'] == Course.objects.get(id=course_id).author.id:
+        course = Course.objects.get(id = course_id)
+        context = {
+            'course_id': course.id,
+            'title': course.title,
+            'subject': course.subject,
+            'category': course.category,
+            'description': course.description,
+            'categories': Category.objects.all(),
+            'subjects': Subject.objects.all(),
+        }
+        return render(request, "course_app/edit.html", context)
+    messages.error(request, 'You are not the author of this course', extra_tags='user_id')
+    return redirect(f'/course/{course_id}')
 
 def edit_course_post(request, course_id):
     if 'user_id' in request.session and request.session['user_id'] == Course.objects.get(id=course_id).author.id and request.method == 'POST':
