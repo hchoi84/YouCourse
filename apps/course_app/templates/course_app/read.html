@@ -41,7 +41,11 @@
 
         <!-- begin header section -->
         <div class="course-header">
+            {% if course_passed %}
+            <h1>{{ course.title }} <span class="passed"> [Course Passed] </span></h1>
+            {% else %}
             <h1>{{ course.title }}</h1>
+            {% endif %}
             <p>Subject: {{ course.subject.name }}</p>
             <p>Category: {{ course.category.name }}</p>
             <p>Description: {{ course.description }}</p>

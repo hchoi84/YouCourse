@@ -79,8 +79,8 @@
 
         <!-- begin right side -->
         <div class="right_side_box">
-            {% if passed %}
-            <h1>{{ video.title }} <span class="quiz_passed"> [Quiz Passed] </span></h1>
+            {% if quiz_passed %}
+            <h1>{{ video.title }} <span class="passed"> [Quiz Passed] </span></h1>
             {% else %}
             <h1>{{ video.title }}</h1>
             {% endif %}

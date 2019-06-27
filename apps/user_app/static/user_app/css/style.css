@@ -347,7 +347,7 @@ nav {
 .course_header{
   width: 100%;
 }
-.quiz_passed{
+.passed{
   color: green;
   font-weight: bold;
 }
