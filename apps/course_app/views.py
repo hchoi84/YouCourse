@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from apps.course_app.models import Course, Subject, Category
+from apps.video_app.models import Video
 from django.contrib import messages
 
 def index(request):
@@ -44,10 +45,31 @@ def create_course_post(request):
     return redirect('/')
 
 def read_course(request, course_id):
+    course_passed = False
+    author = False
+    if 'user_id' in request.session:
+        #check if author        
+        if request.session['user_id'] == Course.objects.get(id=course_id).author.id:
+            author = True
+        #check if passed
+        course_videos = Video.objects.filter(course=Course.objects.get(id=course_id))
+        total = 0
+        for video in course_videos:
+            if len(video.questions.all()) > 0:
+                total +=1
+        correct = 0
+        for video in course_videos:
+            users_passed = video.users_completed.all()
+            for user in users_passed:
+                if user.id == request.session['user_id']:
+                    correct += 1
+        if correct == total:
+            course_passed = True
     context = {
         'course': Course.objects.get(id=course_id),
-        'author': int(request.session['user_id']) == int(Course.objects.get(id=course_id).author.id),
         'category': Category.objects.all(),
+        'author': author,
+        'course_passed': course_passed,
     }
     return render(request, "course_app/read.html", context)
 
@@ -85,4 +107,9 @@ def edit_course_post(request, course_id):
 def like_course(request, course_id):
     if 'user_id' in request.session:
         Course.objects.like_course(course_id, request.session['user_id'])
+    return redirect(f'/course/{course_id}')
+
+def unlike_course(request, course_id):
+    if 'user_id' in request.session:
+        Course.objects.unlike_course(course_id, request.session['user_id'])
     return redirect(f'/course/{course_id}')

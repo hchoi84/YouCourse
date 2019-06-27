@@ -40,6 +40,14 @@ class CourseManager(models.Manager):
         course = self.get(id = course_id)
         course.likes.add(User.objects.get(id=user_id))
         return self
+    
+    def unlike_course(self, course_id, user_id):
+        users_liked = Course.objects.get(id=course_id).likes.all()
+        for user in users_liked:
+            if user.id == user_id:
+                course = self.get(id = course_id)
+                course.likes.remove(User.objects.get(id=user_id))
+        return self
 
 class Category(models.Model):
     name = models.CharField(max_length=255)

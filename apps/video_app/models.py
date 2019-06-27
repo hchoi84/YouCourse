@@ -40,6 +40,14 @@ class VideoManager(models.Manager):
         video = self.get(id=video_id)
         video.likes.add(User.objects.get(id=user_id))
         return self
+
+    def unlike_video(self, video_id, user_id):
+        users_liked = Video.objects.get(id=video_id).likes.all()
+        for user in users_liked:
+            if user.id == user_id:
+                video = self.get(id=video_id)
+                video.likes.remove(User.objects.get(id=user_id))
+        return self
    
 class Video(models.Model):
     title = models.CharField(max_length=255)
