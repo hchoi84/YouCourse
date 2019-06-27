@@ -3,6 +3,8 @@
 
 
 $(document).ready(function () {
+  $('.left_box').hide();
+
   $('#first_name').keyup(function (e) {
     if ($('#first_name').val().length < 2) {
       $('#fname_result').html("At least 2 characters");
@@ -63,5 +65,13 @@ $(document).ready(function () {
     }
   });
 
+  $('#start_registration').on('click', function () {
+    $('.left_box').show();
+    $('.right_box').hide();
+  });
 
+  $('#start_login').on('click', function () {
+    $('.right_box').show();
+    $('.left_box').hide();
+  });
 });
