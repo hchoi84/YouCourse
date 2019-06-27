@@ -6,11 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>USERS</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'user_app/css/style.css' %}">
 </head>
 <body>
     <div class="container">
+        <div class="welcome_box center_content">
+            <h1 class="elegantshadow">Welcome to Learn With YouTube!</h1>
+        </div>
+
+        <div class="main_banner">
+            <div class="background_img"></div>
+            <div class="nav_box">
+                <nav>
+                    <ul class="nav">
+                        <li><a href="/course">Home</a></li>
+                        <li><a href="#">Category</a>
+                            <ul>
+                                <!-- TODO JQuery to update the courses content once a category has been selected -->
+                                {% for cat in category %}
+                                <li><a href="#">{{cat.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="/course/create_course_form">Create</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
 
         <!-- begin header section -->
         <div class="course-header">

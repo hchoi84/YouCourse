@@ -21,46 +21,46 @@
         <div class="main_banner">
             <div class="background_img"></div>
             <div class="nav_box">
-            <nav>
-                <ul class="nav">
-                    <li><a href="/course">Home</a></li>
-                    <li><a href="#">Category</a>
-                        <ul>
-                            <!-- TODO JQuery to update the courses content once a category has been selected -->
-                            {% for cat in category %}
-                            <li><a href="#">{{cat.name}}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                    <li><a href="/course/create_course_form">Create</a></li>
-                    <!-- <li><a href="#">Resume</a>
-                        <ul>
-                            <li><a href="#">item a lonng submenu</a></li>
-                            <li><a href="#">item</a>
-                                <ul>
-                                    <li><a href="#">Ray</a></li>
-                                    <li><a href="#">Veronica</a></li>
-                                    <li><a href="#">Bushy</a></li>
-                                    <li><a href="#">Havoc</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">item</a></li>
-                            <li><a href="#">item</a></li>
-                        </ul>
-                    </li> -->
-                    <!-- <li><a href="#">Download</a></li> -->
-                    <!-- <li><a href="#">Rants</a>
-                        <ul>
-                            <li><a href="#">item</a></li>
-                            <li><a href="#">item</a></li>
-                            <li><a href="#">item</a></li>
-                            <li><a href="#">item</a></li>
-                        </ul>
-                    </li> -->
-                    <li><a href="/logout">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
+                <nav>
+                    <ul class="nav">
+                        <li><a href="/course">Home</a></li>
+                        <li><a href="#">Category</a>
+                            <ul>
+                                <!-- TODO JQuery to update the courses content once a category has been selected -->
+                                {% for cat in category %}
+                                <li><a href="#">{{cat.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="/course/create_course_form">Create</a></li>
+                        <!-- <li><a href="#">Resume</a>
+                            <ul>
+                                <li><a href="#">item a lonng submenu</a></li>
+                                <li><a href="#">item</a>
+                                    <ul>
+                                        <li><a href="#">Ray</a></li>
+                                        <li><a href="#">Veronica</a></li>
+                                        <li><a href="#">Bushy</a></li>
+                                        <li><a href="#">Havoc</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">item</a></li>
+                                <li><a href="#">item</a></li>
+                            </ul>
+                        </li> -->
+                        <!-- <li><a href="#">Download</a></li> -->
+                        <!-- <li><a href="#">Rants</a>
+                            <ul>
+                                <li><a href="#">item</a></li>
+                                <li><a href="#">item</a></li>
+                                <li><a href="#">item</a></li>
+                                <li><a href="#">item</a></li>
+                            </ul>
+                        </li> -->
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
 
         <!-- TODO utilize the same section but change the wording and video output when a category is clicked -->

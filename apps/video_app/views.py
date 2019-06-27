@@ -34,6 +34,7 @@ def read_video(request, course_id, video_id):
         'author': int(request.session['user_id']) == int(Course.objects.get(id=course_id).author.id),
         'questions': Question.objects.filter(video = Video.objects.filter(id=video_id)),
         'passed': passed,
+        'category': Category.objects.all(),
     }
     return render(request, "video_app/read.html", context)
 

@@ -47,6 +47,7 @@ def read_course(request, course_id):
     context = {
         'course': Course.objects.get(id=course_id),
         'author': int(request.session['user_id']) == int(Course.objects.get(id=course_id).author.id),
+        'category': Category.objects.all(),
     }
     return render(request, "course_app/read.html", context)
 
