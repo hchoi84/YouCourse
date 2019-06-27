@@ -49,7 +49,11 @@
             <p>Subject: {{ course.subject.name }}</p>
             <p>Category: {{ course.category.name }}</p>
             <p>Description: {{ course.description }}</p>
-            <p>Likes: {{ course.likes.all|length }} <a href="/course/{{ course.id }}/like_course"><button type="button" class="btn btn-primary">Like</button></a></p>
+            {% if course_liked %}
+                <p>Likes: {{ course.likes.all|length }} <a href="/course/{{ course.id }}/unlike_course"><button type="button" class="btn btn-danger">Unlike</button></a></p>
+            {% else %}
+                <p>Likes: {{ course.likes.all|length }} <a href="/course/{{ course.id }}/like_course"><button type="button" class="btn btn-primary">Like</button></a></p>
+            {% endif %}
             {% if author %}
                 <a href="/course/{{ course.id }}/edit_course_form"><button type="button" class="btn btn-primary">Edit</button></a>
                 <a href="/course/{{ course.id }}/video/create_video_form"><button type="button" class="btn btn-primary">Add Video</button></a>
@@ -69,7 +73,6 @@
                 <h3>{{ video.title }}</h3>
                 <img class="thumbnail" src="{{ video.thumbnail }}" alt="video thumbnail">
                 <p>{{ video.description }}</p>
-                <p>Likes: {{ video.likes|length }}</p>
                 <a href="/course/{{ course.id }}/video/{{ video.id }}">
                     <button type="button" class="btn btn-primary">Start Video</button>
                 </a>
@@ -89,7 +92,6 @@
             <h1>{{ video.title }}</h1>
             {% endif %}
             <p>{{ video.description }}</p>
-            <p>Likes: {{ video.likes|length }}</p>
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="{{ video.url }}" allowfullscreen></iframe>
             </div>
