@@ -25,17 +25,38 @@ def create_video_post(request, course_id):
     return redirect(f'/course/{course_id}')
 
 def read_video(request, course_id, video_id):
-    passed = False
+    quiz_passed = False
+    course_passed = False
+    author = False
     users_passed = Video.objects.get(id=video_id).users_completed.all()
-    for user in users_passed:
-        if user.id == request.session['user_id']:
-            passed = True
+    if 'user_id' in request.session:
+        for user in users_passed:
+            if user.id == request.session['user_id']:
+                quiz_passed = True
+        #check if author        
+        if request.session['user_id'] == Course.objects.get(id=course_id).author.id:
+            author = True
+        #check if passed
+        course_videos = Video.objects.filter(course=Course.objects.get(id=course_id))
+        total = 0
+        for video in course_videos:
+            if len(video.questions.all()) > 0:
+                total +=1
+        correct = 0
+        for video in course_videos:
+            users_passed = video.users_completed.all()
+            for user in users_passed:
+                if user.id == request.session['user_id']:
+                    correct += 1
+        if correct == total:
+            course_passed = True
     context = {
         'video': Video.objects.get(id=video_id),
         'course': Course.objects.get(id=course_id),
-        'author': int(request.session['user_id']) == int(Course.objects.get(id=course_id).author.id),
+        'author': author,
         'questions': Question.objects.filter(video = Video.objects.filter(id=video_id)),
-        'passed': passed,
+        'quiz_passed': quiz_passed,
+        'course_passed': course_passed,
     }
     return render(request, "video_app/read.html", context)
 
@@ -96,4 +117,9 @@ def quiz_post(request, course_id, video_id):
 def like_video(request, course_id, video_id):
     if 'user_id' in request.session:
         Video.objects.like_video(video_id, request.session['user_id'])
+    return redirect(f'/course/{course_id}/video/{video_id}')
+
+def unlike_video(request, course_id, video_id):
+    if 'user_id' in request.session:
+        Video.objects.unlike_video(video_id, request.session['user_id'])
     return redirect(f'/course/{course_id}/video/{video_id}')
