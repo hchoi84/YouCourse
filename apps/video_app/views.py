@@ -28,6 +28,8 @@ def read_video(request, course_id, video_id):
     quiz_passed = False
     course_passed = False
     author = False
+    video_liked = False
+    course_liked = False
     users_passed = Video.objects.get(id=video_id).users_completed.all()
     if 'user_id' in request.session:
         for user in users_passed:
@@ -51,6 +53,14 @@ def read_video(request, course_id, video_id):
         if total != 0:
             if correct == total:
                 course_passed = True
+        users_liked = Video.objects.get(id=video_id).likes.all()
+        for user in users_liked:
+            if user.id == request.session['user_id']:
+                video_liked = True
+        users_liked = Course.objects.get(id=course_id).likes.all()
+        for user in users_liked:
+            if user.id == request.session['user_id']:
+                course_liked = True
     context = {
         'video': Video.objects.get(id=video_id),
         'course': Course.objects.get(id=course_id),
@@ -59,6 +69,8 @@ def read_video(request, course_id, video_id):
         'category': Category.objects.all(),
         'quiz_passed': quiz_passed,
         'course_passed': course_passed,
+        'video_liked': video_liked,
+        'course_liked': course_liked,
     }
     return render(request, "video_app/read.html", context)
 

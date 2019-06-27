@@ -47,6 +47,7 @@ def create_course_post(request):
 def read_course(request, course_id):
     course_passed = False
     author = False
+    course_liked = False
     if 'user_id' in request.session:
         #check if author        
         if request.session['user_id'] == Course.objects.get(id=course_id).author.id:
@@ -66,11 +67,16 @@ def read_course(request, course_id):
         if total != 0:
             if correct == total:
                 course_passed = True
+        users_liked = Course.objects.get(id=course_id).likes.all()
+        for user in users_liked:
+            if user.id == request.session['user_id']:
+                course_liked = True
     context = {
         'course': Course.objects.get(id=course_id),
         'category': Category.objects.all(),
         'author': author,
         'course_passed': course_passed,
+        'course_liked': course_liked,
     }
     return render(request, "course_app/read.html", context)
 
