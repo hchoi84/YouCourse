@@ -63,8 +63,9 @@ def read_course(request, course_id):
             for user in users_passed:
                 if user.id == request.session['user_id']:
                     correct += 1
-        if correct == total:
-            course_passed = True
+        if total != 0:
+            if correct == total:
+                course_passed = True
     context = {
         'course': Course.objects.get(id=course_id),
         'category': Category.objects.all(),

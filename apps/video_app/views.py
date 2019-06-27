@@ -48,8 +48,9 @@ def read_video(request, course_id, video_id):
             for user in users_passed:
                 if user.id == request.session['user_id']:
                     correct += 1
-        if correct == total:
-            course_passed = True
+        if total != 0:
+            if correct == total:
+                course_passed = True
     context = {
         'video': Video.objects.get(id=video_id),
         'course': Course.objects.get(id=course_id),
