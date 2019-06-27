@@ -26,8 +26,10 @@ def create_video_post(request, course_id):
 
 def read_video(request, course_id, video_id):
     passed = False
-    if 'user_id' in request.session and len(Question.objects.filter(video = Video.objects.filter(id=video_id).exclude(users_completed = User.objects.get(id=request.session['user_id'])))) < len(Question.objects.filter(video = Video.objects.filter(id=video_id))):
-        passed = True # this if is trash, need to refactor - if current user passed quiz
+    users_passed = Video.objects.get(id=video_id).users_completed.all()
+    for user in users_passed:
+        if user.id == request.session['user_id']:
+            passed = True
     context = {
         'video': Video.objects.get(id=video_id),
         'course': Course.objects.get(id=course_id),
@@ -43,13 +45,16 @@ def delete_video(request, course_id, video_id):
     return redirect(f'/course/{course_id}')
 
 def edit_video_form(request, course_id, video_id):
-    video = Video.objects.get(id=video_id)
-    context = {
-        'video': Video.objects.get(id=video_id),
-        'course': Course.objects.get(id=course_id),
-        'questions': Question.objects.filter(video = Video.objects.get(id=video_id)),
-    }
-    return render(request, "video_app/edit.html", context)
+    if 'user_id' in request.session and request.session['user_id'] == Video.objects.get(id=video_id).course.author.id and request.method == 'POST':
+        video = Video.objects.get(id=video_id)
+        context = {
+            'video': Video.objects.get(id=video_id),
+            'course': Course.objects.get(id=course_id),
+            'questions': Question.objects.filter(video = Video.objects.get(id=video_id)),
+        }
+        return render(request, "video_app/edit.html", context)
+    messages.error(request, 'You are not the author of this course', extra_tags='user_id')
+    return redirect(f'/course/{course_id}/video/{video_id}')
 
 def edit_video_post(request, course_id, video_id):
     if 'user_id' in request.session and request.session['user_id'] == Video.objects.get(id=video_id).course.author.id and request.method == 'POST':
