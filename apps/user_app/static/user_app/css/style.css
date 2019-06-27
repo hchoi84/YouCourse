@@ -1,11 +1,11 @@
-/* *{
+*{
     border: 1px dotted red;
-} */
+}
 
 .container{
     padding-top: 30px;
     margin: auto;
-    width: 80%;
+    width: 1000px;
 }
 .welcome_box, .box_header{
     margin-bottom: 10px;
@@ -359,10 +359,10 @@ nav {
   vertical-align: top;
 }
 .right_side_box{
-  width: 69%;
+  width: 68%;
   height: auto;
   display: inline-block;
-  margin-left: 6px;
+  margin-left: 15px;
   vertical-align: top;
 }
 .thumbnail{
