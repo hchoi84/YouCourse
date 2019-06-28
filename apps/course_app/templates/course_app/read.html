@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>USERS</title>
+    <title>{{ course.title }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -69,7 +69,9 @@
         <!-- begin left side -->
         <div class="left_side_box">
             <div class="text_center">
-                <h1>List of videos</h1>
+            {% if course.videos.all|length == 0 %}
+            <h6>This course needs a video!</h6>
+            {% endif %}
             </div>
             {% for video in course.videos.all %}
             <div class="video_box">
@@ -90,9 +92,7 @@
         <!-- begin right side -->
         <div class="right_side_box">
             <div class="text_center">
-                <h1>Video</h1>
             </div>
-            <p>Please select a video</p>
             <div class="video_lesson_box">
                 <!-- video code goes here -->
             </div>
