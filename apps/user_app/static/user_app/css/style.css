@@ -104,6 +104,11 @@ input[type=number]::-webkit-outer-spin-button {
 .align-top{
   vertical-align: top;
 }
+.scroll_box{
+  overflow-y: auto;
+  height: 110px;
+  width: 100%;
+}
 
 /* begin style for nav */
 .nav_box{
@@ -383,9 +388,9 @@ nav {
 .text_center{
   text-align: center;
 }
-.video_lesson_box{
+/* .video_lesson_box{
   margin: auto;
   width: 90%;
   height: 400px;
-}
+} */
 /* end red.html specifics */

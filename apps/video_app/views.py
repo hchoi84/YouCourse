@@ -67,6 +67,7 @@ def read_video(request, course_id, video_id):
         'course_passed': course_passed,
         'course_liked': course_liked,
     }
+    request.session['vid'] = video_id
     return render(request, "video_app/read.html", context)
 
 def delete_video(request, course_id, video_id):

@@ -88,6 +88,8 @@ def read_course(request, course_id):
         'course_passed': course_passed,
         'course_liked': course_liked,
     }
+    if 'vid' in request.session:
+        del request.session['vid']
     return render(request, "course_app/read.html", context)
 
 def delete_course(request, course_id):
@@ -127,11 +129,17 @@ def edit_course_post(request, course_id):
 def like_course(request, course_id):
     if 'user_id' in request.session:
         Course.objects.like_course(course_id, request.session['user_id'])
+    if 'vid' in request.session:
+        url = (f"/course/{course_id}/video/{request.session['vid']}")
+        return redirect(url)
     return redirect(f'/course/{course_id}')
 
 def unlike_course(request, course_id):
     if 'user_id' in request.session:
         Course.objects.unlike_course(course_id, request.session['user_id'])
+    if 'vid' in request.session:
+        url = (f"/course/{course_id}/video/{request.session['vid']}")
+        return redirect(url)
     return redirect(f'/course/{course_id}')
 
 def get_cat_id(request, cat_id):
