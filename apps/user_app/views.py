@@ -44,6 +44,7 @@ def profile(request):
         "user": user,
         "completed": user.videos_completed.all(),
         "created": user.courses_authored.all(),
+        'categories': Category.objects.all(),
     }
     return render(request, "user_app/profile.html", context)
 # region redirects

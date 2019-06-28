@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Question
 from apps.video_app.models import Video
-from apps.course_app.models import Course
+from apps.course_app.models import Course, Category
 from django.contrib import messages
 
 def create_question_post(request, course_id, video_id):
@@ -23,6 +23,7 @@ def edit_question_form(request, course_id, video_id, question_id):
         'video': Video.objects.get(id=video_id),
         'course': Course.objects.get(id=course_id),
         'question': Question.objects.get(id=question_id),
+        'categories': Category.objects.all(),
     }
     return render(request, "quiz_app/edit.html", context)
 

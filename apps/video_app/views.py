@@ -8,6 +8,7 @@ from django.contrib import messages
 def create_video_form(request, course_id):
     context = {
         'course': Course.objects.get(id=course_id),
+        'categories': Category.objects.all(),
     }
     return render(request, "video_app/create.html", context)
 
@@ -80,6 +81,7 @@ def edit_video_form(request, course_id, video_id):
             'video': Video.objects.get(id=video_id),
             'course': Course.objects.get(id=course_id),
             'questions': Question.objects.filter(video = Video.objects.get(id=video_id)),
+            'categories': Category.objects.all(),
         }
         return render(request, "video_app/edit.html", context)
     messages.error(request, 'You are not the author of this video', extra_tags='user_id')

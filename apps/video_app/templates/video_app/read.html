@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <div class="welcome_box center_content">
-            <h1 class="elegantshadow">Welcome to Learn With YouTube!</h1>
+            <h1 class="elegantshadow">Course: {{ course.title }}</h1>
         </div>
 
         <div class="main_banner">
@@ -28,11 +28,12 @@
                             <ul>
                                 <!-- TODO JQuery to update the courses content once a category has been selected -->
                                 {% for cat in category %}
-                                <li><a href="#">{{cat.name}}</a></li>
+                                <li><a href="/course/select_crs/{{cat.id}}">{{cat.name}}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
                         <li><a href="/course/create_course_form">Create</a></li>
+                        <li><a href="/profile">Profile</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </nav>
@@ -72,7 +73,7 @@
             <div class="video_box">
                 <h3>{{ video.title }}</h3>
                 <img class="thumbnail" src="{{ video.thumbnail }}" alt="video thumbnail">
-                <p>{{ video.description }}</p>
+                <p>{{ video.description|truncatewords:50 }}</p>
                 <a href="/course/{{ course.id }}/video/{{ video.id }}">
                     <button type="button" class="btn btn-primary">Start Video</button>
                 </a>
@@ -129,8 +130,10 @@
                             {% endif %}
                         {% endfor %}
                         {% endif %}
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    {% endfor %}
+                        {% endfor %}
+                    {% if questions|length > 0 %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    {% endif %}
                 </form>
             </div>
         </div>

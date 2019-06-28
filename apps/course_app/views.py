@@ -4,10 +4,20 @@ from apps.video_app.models import Video
 from django.contrib import messages
 
 def index(request):
-    context={
+    if 'cat_id' in request.session:
+        context={
         "category": Category.objects.all(),
         "courses": Course.objects.all().order_by('-created_at')[:6],
-    }
+        'cat_crs': Course.objects.filter(category=Category.objects.get(id=request.session['cat_id'])),
+        'cat_selected': True,
+        }
+        del request.session['cat_id']
+    else:
+        context={
+            "category": Category.objects.all(),
+            "courses": Course.objects.all().order_by('-created_at')[:6],
+            'cat_selected': False,
+        }
     return render(request, "course_app/courses.html", context)
 
 def create_course_form(request):
@@ -123,3 +133,7 @@ def unlike_course(request, course_id):
     if 'user_id' in request.session:
         Course.objects.unlike_course(course_id, request.session['user_id'])
     return redirect(f'/course/{course_id}')
+
+def get_cat_id(request, cat_id):
+    request.session['cat_id'] = cat_id
+    return redirect('/course')

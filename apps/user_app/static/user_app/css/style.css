@@ -1,6 +1,6 @@
-*{
+/* *{
     border: 1px dotted red;
-}
+} */
 
 .container{
     padding-top: 30px;
@@ -112,6 +112,9 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
 }
 nav {    
+    background: linear-gradient(to bottom, #555, #111);
+    border-bottom: 4px #aaa solid; 
+    border-radius: 10px;
     display: block;
     text-align: center;
   }
@@ -140,12 +143,13 @@ nav {
   .nav li{position: relative;}
   .nav > li { 
     float:left; 
-    border-bottom: 4px #aaa solid; 
+    /* border-bottom: 4px #aaa solid;  */
     margin-right: 1px; 
   } 
   .nav > li > a { 
     margin-bottom:1px;
-    box-shadow:inset 0 2em .33em -.5em #555; 
+    /* box-shadow:inset 0 2em .33em -.5em #555;  */
+    background: linear-gradient(to bottom, #555, #111);
   }
   .nav > li:hover , .nav > li:hover >a{  border-bottom-color:orange;}
   .nav li:hover > a { color:orange; }
@@ -182,7 +186,6 @@ nav {
   min-width: 100%;
 }
 .nav > li li ul {  border-left:1px solid #fff;}
-
 
 .nav > li li:hover > ul { 
  /* margin-left: 1px */

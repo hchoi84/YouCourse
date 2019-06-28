@@ -11,7 +11,32 @@
 </head>
 <body>
     <div class="container">
-        <h1>Edit Course</h1>
+        <div class="center_content">
+            <h1 class="elegantshadow">Edit Course</h1>
+        </div>
+        <div class="main_banner">
+            <div class="background_img"></div>
+            <div class="nav_box">
+                <nav>
+                    <ul class="nav">
+                        <li><a href="/course">Home</a></li>
+                        <li><a href="#">Category</a>
+                            <ul>
+                                {% for cat in categories %}
+                                <li><a href="/course/select_crs/{{cat.id}}">{{cat.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="/course/create_course_form">Create</a></li>
+                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <br>
+
         {% if messages %}
         {% for message in messages %}
                 <p>{{ message }}</p>

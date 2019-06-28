@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <div class="welcome_box center_content">
-            <h1 class="elegantshadow">Welcome to Learn With YouTube!</h1>
+            <h1 class="elegantshadow">Welcome to YouCourse!</h1>
         </div>
 
         <div class="main_banner">
@@ -26,9 +26,8 @@
                         <li><a href="/course">Home</a></li>
                         <li><a href="#">Category</a>
                             <ul>
-                                <!-- TODO JQuery to update the courses content once a category has been selected -->
                                 {% for cat in category %}
-                                <li><a href="#">{{cat.name}}</a></li>
+                                <li><a href="/course/select_crs/{{cat.id}}">{{cat.name}}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>
@@ -57,6 +56,7 @@
                                 <li><a href="#">item</a></li>
                             </ul>
                         </li> -->
+                        <li><a href="/profile">Profile</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </nav>
@@ -70,19 +70,33 @@
             </div>
         
             <div class="recently_created_videos">
-                {% for course in courses %}
-                <div class="course_video">
-                    <!-- <iframe width="350" height="209"
-                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                    </iframe> -->
-                    <a href="/course/{{ course.id }}">
-                        <img src="{% static 'user_app/images/course_img_placeholder.png' %}" alt="Course thumbnail" width='350' height='209'>
-                    </a>
-                    <p class="course_title">{{ course.title }}</p>
-                    <p class="course_creator">{{ course.author.first_name}}</p>
-                    <p class="course_created_at">{{ course.created_at}}</p>
-                </div>
-                {% endfor %}
+                {% if cat_selected %}
+                    {% for course in cat_crs %}
+                    <div class="course_video">
+                        <a href="/course/{{ course.id }}">
+                            <img src="{% static 'user_app/images/course_img_placeholder.png' %}" alt="Course thumbnail" width='350' height='209'>
+                        </a>
+                        <p class="course_title">Title: {{ course.title }}</p>
+                        <p class="course_creator">Creator: {{ course.author.first_name}}</p>
+                        <p class="course_created_at">Created Date: {{ course.created_at}}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    {% for course in courses %}
+                    <div class="course_video">
+                        <!-- <iframe width="350" height="209"
+                        src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                        </iframe> -->
+                        <a href="/course/{{ course.id }}">
+                            <img src="{% static 'user_app/images/course_img_placeholder.png' %}" alt="Course thumbnail" width='350' height='209'>
+                        </a>
+                        <p class="course_title">Title: {{ course.title }}</p>
+                        <p class="course_creator">Creator: {{ course.author.first_name}}</p>
+                        <p class="course_created_at">Created Date: {{ course.created_at}}</p>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
             </div>
         </div>
 
